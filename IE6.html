@@ -1,0 +1,9 @@
+<!-- Detects IE6 and displays message if IE6. This goes in header at top of the page -->
+<script language="javascript">
+var browserName = navigator.appName;
+var browserVer = navigator.appVersion;
+if(browserName == 'Microsoft Internet Explorer' && browserVer.indexOf('MSIE 6.0') != -1) {
+	document.write("<p style='text-align:center;color:red;font-weight:bold;'>Our website is not optimized for Internet Explorer 6. Please upgrade to Internet Explorer 7 or above, or use Firefox, Chrome, or Safari.</p>");
+}
+</script>
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Healthcare Engineering</title>
+
+<meta name="keywords" content="Healthcare Engineering, Health Care Engineering, University of Southern California, USC, Industrial Engineering, efficiency, hosptial, management engineering, surgery" />
+
+<link href="styles.css" rel="stylesheet" type="text/css" />
+
+
+</style>
+<!--
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;
+    &amp;key=ABQIAAAAqz84E5Y3AfXVoIIMcuGa9BRk7T9zcHCZkP3cmP15rKgDiNXWvRSPY_ibSqc2evaU3qG14s1gHmMRDQ"
+    type="text/javascript">
+  </script>-->
+  
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;
+    &amp;key=ABQIAAAAqz84E5Y3AfXVoIIMcuGa9BSAzpegr-pxnW3fT32TMsaz9-15bBQsKwgribS2EQyOhwYoDsciQGJJRw"
+    type="text/javascript">
+  </script>
+  
+
+<script language="javascript">
+var uscInfo = new Array(3);
+
+//this creates a multidimensional array
+for(i=0; i<3; i++) {
+	uscInfo[i] = new Array(2);
+}
+
+//uscInfo[0][0] = '3715 McClintock Avenue, Los Angeles, CA 90089';
+//uscInfo[0][1] = 'USC: Epstein Department of Industrial &amp; Systems Engineering';
+
+uscInfo[0][0] = '1001 Potrero Ave Ste 107, San Francisco, CA 94110';
+uscInfo[0][1] = 'San Francisco General Hospital';
+
+
+uscInfo[1][0] = '700 River Drive, Fort Bragg, CA, 95437';
+uscInfo[1][1] = 'Medocino Coast Medical Center';
+
+
+
+uscInfo[2][0] = '1441 Constitution Blvd., Salinas, CA, 93906';
+uscInfo[2][1] = 'Natividad Medical Center';
+
+var map = null;
+var geocoder = null;
+
+	function addListener(marker, address, name)
+	{
+		GEvent.addListener(marker, "click", function() {
+  				marker.openInfoWindowHtml(name+"<br/>"+address);
+				});
+	}
+	
+	function plotPoint(address,hospital_name) {
+      if (geocoder) {
+        geocoder.getLatLng(
+          address,
+          function(point) {
+            if (!point) {
+              alert(address + " not found");
+            } else {
+			  marker = new GMarker(point)		  
+			  map.addOverlay(marker)
+			  addListener(marker, address, hospital_name);
+            }
+          }
+        );
+      }
+    } 
+	
+
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        map = new GMap2(document.getElementById("map_canvas"));
+		geocoder = new GClientGeocoder();
+		map.setCenter(new GLatLng(37.7556360, -122.405094), 6);
+		map.addControl(new GSmallMapControl());
+		map.addControl(new GMapTypeControl());
+	  for(i=0; i<3; i++) {
+			plotPoint(uscInfo[i][0], uscInfo[i][1]);
+			}
+    	}
+	}
+</script>
+</head>
+
+<body onload="initialize();" onunload="GUnload()">
+      <div id="map_canvas" style="width: 800px; height: 450px;"></div>
+</body>
+</html>
+
+
+

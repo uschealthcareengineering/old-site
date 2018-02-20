@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Healthcare Engineering</title>
+
+<meta name="keywords" content="Healthcare Engineering, Health Care Engineering, University of Southern California, USC, Industrial Engineering, efficiency, hosptial, management engineering, surgery" />
+
+<link href="styles.css" rel="stylesheet" type="text/css" />
+
+
+</style>
+<!--
+  <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;
+    &amp;key=ABQIAAAAqz84E5Y3AfXVoIIMcuGa9BRk7T9zcHCZkP3cmP15rKgDiNXWvRSPY_ibSqc2evaU3qG14s1gHmMRDQ"
+    type="text/javascript">
+  </script>-->
+  
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;
+    &amp;key=ABQIAAAAqz84E5Y3AfXVoIIMcuGa9BSAzpegr-pxnW3fT32TMsaz9-15bBQsKwgribS2EQyOhwYoDsciQGJJRw"
+    type="text/javascript">
+  </script>
+  
+
+<script language="javascript">
+var uscInfo = new Array(9);
+
+//this creates a multidimensional array
+for(i=0; i<9; i++) {
+	uscInfo[i] = new Array(2);
+}
+
+uscInfo[0][0] = '3715 McClintock Avenue, Los Angeles, CA 90089';
+uscInfo[0][1] = 'USC: Epstein Department of Industrial &amp; Systems Engineering';
+
+//uscInfo[1][0] = '1001 Potrero Ave Ste 107, San Francisco, CA 94110';
+//uscInfo[1][1] = 'San Francisco General Hospital';
+
+uscInfo[1][0] = '3291 Loma Vista Road, Ventura, CA, 93003';
+uscInfo[1][1] = 'Ventura County Medical Center';
+
+uscInfo[2][0] = '15107 Vanowen Street, Van Nuys, CA 91405';
+uscInfo[2][1] = 'Valley Presbyterian Hospital';
+
+uscInfo[3][0] = '3630 East Imperial Highway, Lynwood, CA 90262';
+uscInfo[3][1] = 'St. Francis Medical Center';
+
+uscInfo[4][0] = '1200 North State Street, Los Angeles, CA, 90033';
+uscInfo[4][1] = 'LAC+USC Medical Center';
+
+uscInfo[5][0] = '1720 Cesar E. Chavez Ave., Los Angeles, CA, 90033';
+uscInfo[5][1] = 'White Memorial Medical Center';
+
+uscInfo[6][0] = '4650 Sunset Boulevard, Los Angeles, CA, 90027';
+uscInfo[6][1] = "Children's Hospital of Los Angeles";
+
+uscInfo[7][0] = '400 N. Pepper Ave. Colton, CA, 92324';
+uscInfo[7][1] = 'Arrowhead Medical Center';
+
+//uscInfo[8][0] = '700 River Drive, Fort Bragg, CA, 95437';
+//uscInfo[8][1] = 'Medocino Coast Medical Center';
+
+
+
+uscInfo[8][0] = '26520 Cactus Avenue, Moreno Valley, CA, 92555';
+uscInfo[8][1] = 'Riverside County Regional Medical Center';
+
+var map = null;
+var geocoder = null;
+
+	function addListener(marker, address, name)
+	{
+		GEvent.addListener(marker, "click", function() {
+  				marker.openInfoWindowHtml(name+"<br/>"+address);
+				});
+	}
+	
+	function plotPoint(address,hospital_name) {
+      if (geocoder) {
+        geocoder.getLatLng(
+          address,
+          function(point) {
+            if (!point) {
+              alert(address + " not found");
+            } else {
+			  marker = new GMarker(point)		  
+			  map.addOverlay(marker)
+			  addListener(marker, address, hospital_name);
+            }
+          }
+        );
+      }
+    } 
+	
+
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        map = new GMap2(document.getElementById("map_canvas"));
+		geocoder = new GClientGeocoder();
+		map.setCenter(new GLatLng(34.0199624, -118.2889714), 8);
+		map.addControl(new GSmallMapControl());
+		map.addControl(new GMapTypeControl());
+	  for(i=0; i<9; i++) {
+			plotPoint(uscInfo[i][0], uscInfo[i][1]);
+			}
+    	}
+	}
+</script>
+</head>
+
+<body onload="initialize();" onunload="GUnload()">
+      <div id="map_canvas" style="width: 800px; height: 450px;"></div>
+</body>
+</html>
+
+
+
